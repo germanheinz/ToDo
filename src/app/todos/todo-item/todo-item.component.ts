@@ -22,9 +22,6 @@ export class TodoItemComponent implements OnInit {
   constructor(private store: Store<AppState>) { }
 
   ngOnInit(): void {
-    // this.toDo.completed = true;
-    console.log(this.toDo.completed);
-    console.log(this.checkCompleted);
 
     this.checkCompleted = new FormControl(this.toDo.completed);
     this.textInput      = new FormControl(this.toDo.text, Validators.required);
@@ -34,7 +31,6 @@ export class TodoItemComponent implements OnInit {
     });
   }
   editToDo(){
-    console.log('click!');
     this.editing = true;
     this.textInput.setValue(this.toDo.text);
 
@@ -54,5 +50,10 @@ export class TodoItemComponent implements OnInit {
       text: this.textInput.value
     })
     );
+  }
+  deleteTodo(){
+
+    this.store.dispatch(actions.deleteTodo({id: this.toDo.id}));
+
   }
 }
