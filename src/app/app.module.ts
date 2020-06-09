@@ -8,6 +8,10 @@ import { TodoModule } from './todos/todo.module';
 import { StoreModule } from '@ngrx/store';
 import { todoReducer } from './todos/todo.reducer';
 
+//DEVTOOLS
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from 'src/environments/environment';
+
 
 @NgModule({
   declarations: [
@@ -17,7 +21,11 @@ import { todoReducer } from './todos/todo.reducer';
   imports: [
     BrowserModule,
     TodoModule,
-    StoreModule.forRoot({ todo: todoReducer })
+    StoreModule.forRoot({ todo: todoReducer }),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25, // Retains last 25 states
+      logOnly: environment.production, // Restrict extension to log-only mode
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]
