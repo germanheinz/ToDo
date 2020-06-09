@@ -1,6 +1,6 @@
 
 import { createReducer, on } from '@ngrx/store';
-import { create } from './todo.actions';
+import { create, editToggle } from './todo.actions';
 import { Todo } from './models/todo.model';
 
 
@@ -14,6 +14,18 @@ export const initialState: Todo[] = [
 // tslint:disable-next-line: variable-name
 const _todoReducer = createReducer(initialState,
     on(create, (state, {text})  => [...state, new Todo(text)]),
+    on(editToggle, (state, {id})  => { 
+      return state.map( todo => {
+        if(todo.id === id){
+          return {
+            ...todo,
+            completed: !todo.completed
+          }
+        }else{
+          return todo;
+        }
+      });
+    }),
   );
 
 export function todoReducer(state, action) {
