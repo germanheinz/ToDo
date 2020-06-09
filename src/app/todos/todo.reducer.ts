@@ -4,7 +4,12 @@ import { create } from './todo.actions';
 import { Todo } from './models/todo.model';
 
 
-export const initialState: Todo[] = [];
+export const initialState: Todo[] = [
+  new Todo('test 1'),
+  new Todo('test 2'),
+  new Todo('test 3'),
+  new Todo('test 4')
+];
 
 // tslint:disable-next-line: variable-name
 const _todoReducer = createReducer(initialState,
